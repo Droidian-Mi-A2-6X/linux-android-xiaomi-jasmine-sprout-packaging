@@ -20,11 +20,27 @@ DEVICE_VENDOR = xiaomi
 # Slug for the device model. Like above.
 DEVICE_MODEL = jasmine-sprout
 
+# Slug for the device platform. If unsure, keep this commented.
+#DEVICE_PLATFORM = platform
+
 # Marketing-friendly full-name. This will be used inside package descriptions
 DEVICE_FULL_NAME = Xiaomi Mi A2
 
+# Whether to use configuration fragments to augment the kernel configuration.
+# If unsure, keep this to 0.
+KERNEL_CONFIG_USE_FRAGMENTS = 0
+
+# Whether to use diffconfig to generate the device-specific configuration.
+# If you enable this, you should set KERNEL_CONFIG_USE_FRAGMENTS to 1.
+# If unsure, keep this to 0.
+KERNEL_CONFIG_USE_DIFFCONFIG = 0
+
+# The diffconfig to apply. Only used when KERNEL_CONFIG_USE_DIFFCONFIG is
+# enabled.
+#KERNEL_PRODUCT_DIFFCONFIG = my_diffconfig
+
 # Defconfig to use
-KERNEL_DEFCONFIG = waymine-perf_defconfig
+KERNEL_DEFCONFIG = jasmine-perf_defconfig
 
 # Whether to include DTBs with the image. Use 0 (no) or 1.
 KERNEL_IMAGE_WITH_DTB = 1
@@ -63,6 +79,20 @@ KERNEL_BOOTIMAGE_INITRAMFS_OFFSET = 0x01000000
 KERNEL_BOOTIMAGE_SECONDIMAGE_OFFSET = 0x00f00000
 KERNEL_BOOTIMAGE_TAGS_OFFSET = 0x00000100
 
+# Specify boot image security patch level if needed
+#KERNEL_BOOTIMAGE_PATCH_LEVEL = 2022-04-05
+
+# Required for header version 2, ignore otherwise
+KERNEL_BOOTIMAGE_DTB_OFFSET = 0x1f00000
+
+# Kernel bootimage version. Defaults to 0 (legacy header).
+# As a rule of thumb:
+# Devices launched with Android 8 and lower: version 0
+# Devices launched with Android 9: version 1
+# Devices launched with Android 10: version 2
+# Devices launched with Android 11: version 2 or 3 (GKI)
+KERNEL_BOOTIMAGE_VERSION = 1
+
 ########################################################################
 # Android verified boot
 ########################################################################
@@ -86,7 +116,7 @@ FLASH_ENABLED = 1
 
 # If your device is treble-ized, but aonly, you should set the following to
 # 1 (yes).
-FLASH_IS_AONLY = 1
+FLASH_IS_AONLY = 0
 
 # `flash-bootimage` defaults are enough for most recent devices, but legacy
 # devices won't work out of the box.
@@ -112,6 +142,9 @@ FLASH_INFO_MODEL = Mi A2
 # method, specifying FLASH_INFO_MANUFACTURER and FLASH_INFO_MODEL is
 # recommended.
 FLASH_INFO_CPU = Qualcomm Technologies, Inc SDM660
+
+# Space-separated list of supported device ids as reported by fastboot
+FLASH_INFO_DEVICE_IDS = jasmine jasmine_sprout
 
 ########################################################################
 # Kernel build settings
